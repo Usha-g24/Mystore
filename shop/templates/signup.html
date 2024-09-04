@@ -1,0 +1,59 @@
+{% extends 'theme.html' %}
+
+{% block main %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-6">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-success text-white text-center">
+                    <h1 class="display-4">Welcome</h1>
+                    <h2>Signup Page</h2>
+                    <p>Create an account:</p>
+                </div>
+                <div class="card-body bg-light p-4">
+                    {% if error %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>{{ error }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% elif success %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ success }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+                    <form method="POST" action="signup">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" name="nn" id="firstName" class="form-control" value="{{ value.nn }}" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" name="ln" id="lastName" class="form-control" value="{{ value.ln }}" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" id="email" class="form-control" value="{{ value.email }}" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="mobileNumber" class="form-label">Mobile Number (10-digit)</label>
+                            <input type="text" name="mobile_number" id="mobileNumber" class="form-control" pattern="\d{10}" title="Please enter exactly 10 digits." value="{{ value.mobile_number }}" required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" name="password" id="password" class="form-control" required>
+                        </div>
+                        <div class="d-grid">
+                            <input type="submit" value="Signup" class="btn btn-primary btn-block">
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center py-3">
+                    <small class="text-muted">Already have an account? <a href="login" class="text-primary">Login here</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
